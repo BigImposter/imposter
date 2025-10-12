@@ -4,4 +4,16 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-yew = { git = "https://github.com/yewstack/yew/", features = ["csr"] }
+implicit-clone = "0.6.0"
+web-sys = "0.3.81"
+yew-hooks = "0.3.4"
+
+[dependencies.uuid]
+version = "1.18.1"
+# Lets you generate random UUIDs
+features = ["v4", "js"]
+
+[dependencies.yew]
+version = "0.21.0"
+features = ["csr"]
+

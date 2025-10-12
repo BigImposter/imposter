@@ -1,23 +1,11 @@
-use yew::prelude::*;
+mod app;
+mod player_list;
+mod player_card;
+mod player;
+mod use_map;
+mod text_input_pop_up;
 
-#[function_component]
-fn App() -> Html {
-    let counter = use_state(|| 0);
-    let onclick = {
-        let counter = counter.clone();
-        move |_| {
-            let value = *counter + 1;
-            counter.set(value);
-        }
-    };
-
-    html! {
-        <div>
-            <button {onclick}>{ "+1" }</button>
-            <p>{ *counter }</p>
-        </div>
-    }
-}
+use app::App;
 
 fn main() {
     yew::Renderer::<App>::new().render();
