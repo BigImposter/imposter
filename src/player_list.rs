@@ -41,6 +41,13 @@ pub fn PlayerList() -> Html {
         }
     };
 
+    let on_add_player_abort = {
+        let is_open_name_input = is_open_name_input.clone();
+        move |_| {
+            is_open_name_input.set(false);
+        }
+    };
+
     html! {
         <>
         <div id="player-list">
@@ -55,7 +62,9 @@ pub fn PlayerList() -> Html {
             <p>{ "+" }</p>
         </div>
         </div>
-        <TextInputPopUp is_open={*is_open_name_input} add_text={add_player}/>
+        if *is_open_name_input {
+            <TextInputPopUp add_text={add_player} on_abort={on_add_player_abort}/>
+        }
         </>
     }
 }

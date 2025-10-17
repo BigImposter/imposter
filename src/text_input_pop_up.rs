@@ -4,8 +4,8 @@ use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct TextPopupProps {
-    pub is_open: bool,
     pub add_text: Callback<AttrValue>,
+    pub on_abort: Callback<()>,
 }
 
 #[function_component]
@@ -28,16 +28,21 @@ pub fn TextInputPopUp(props: &TextPopupProps) -> Html {
             add_text.emit(AttrValue::from((*input_value).clone()))
         }
     };
-    if !props.is_open {
-        return html! {}
-    }
+    
+    let abort_button_clicked = {
+        let on_abort = props.on_abort.clone();
+        move |_| {
+            on_abort.emit(());
+        }
+    };
+
     html! {
         <div class="text-input-popup">
             <p>{"Name für neue*r Spieler*In:"}</p>
             <input type="text" oninput={on_input}/>
             <div>
                 <button onclick={add_button_clicked}>{ "Hinzufügen" }</button>
-                <button>{ "Abbrechen" }</button>
+                <button onclick={abort_button_clicked}>{ "Abbrechen" }</button>
             </div>
         </div>
     }
