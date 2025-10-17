@@ -5,6 +5,9 @@ mod player;
 mod use_map;
 mod text_input_pop_up;
 mod game_settings;
+mod slider;
+mod pre_game;
+mod game;
 
 use app::App;
 

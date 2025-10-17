@@ -59,6 +59,17 @@ impl<K, V> UseMapHandle<K, V> {
         v
     }
 
+    pub fn to_vec(&self) -> Vec<(K, V)> 
+    where
+        V: Clone,
+        K: Clone,
+    {
+        self.inner.borrow_mut()
+            .iter()
+            .map(|(k, v)| (k.clone(), v.clone()))
+            .collect()
+    }
+
     /// Retains only the elements specified by the predicate.
     pub fn retain<F>(&self, f: F)
     where

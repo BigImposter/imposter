@@ -1,29 +1,24 @@
 use std::collections::HashMap;
+use std::rc::Rc;
 
 use uuid::Uuid;
 
 use yew::prelude::*;
-use yew_hooks::prelude::*;
 
 use crate::player_card::PlayerCard;
 use crate::player::Player;
 use crate::text_input_pop_up::TextInputPopUp;
 
-#[function_component]
-pub fn PlayerList() -> Html {
-    let players = use_map(HashMap::from([
-        (Uuid::new_v4(), Player::new(AttrValue::from("Brady Haran"))),
-        (Uuid::new_v4(), Player::new(AttrValue::from("Tom Scott"))),
-        (Uuid::new_v4(), Player::new(AttrValue::from("CPG Grey"))),
-    ]));
-    let is_open_name_input = use_state(|| false);
+#[derive(PartialEq, Properties)]
+pub struct PlayerListProps {
+    pub on_player_delete: Callback<Uuid>,
+    pub on_add_player: Callback<AttrValue>,
+    pub players_vec: Vec<(Uuid, Player)>,
+}
 
-    let on_player_delete: Callback<Uuid> = {
-        let players = players.clone();
-        Callback::from(move |uu_id| {
-            players.remove(&uu_id);
-        })
-    };
+#[function_component]
+pub fn PlayerList(props: &PlayerListProps) -> Html {
+    let is_open_name_input = use_state(|| false);
 
     let add_player_button_clicked = {
         let is_open_name_input = is_open_name_input.clone();
@@ -33,10 +28,10 @@ pub fn PlayerList() -> Html {
     };
 
     let add_player = {
-        let players = players.clone();
         let is_open_name_input = is_open_name_input.clone();
+        let on_add_player = props.on_add_player.clone();
         move | name: AttrValue | {
-            players.insert(Uuid::new_v4(), Player::new(name));
+            on_add_player.emit(name);
             is_open_name_input.set(false);
         }
     };
@@ -51,13 +46,13 @@ pub fn PlayerList() -> Html {
     html! {
         <>
         <div id="player-list">
-        {
-            players.current().iter().map(|(&key, player)| {
-                html! { 
-                    <PlayerCard name={player.name.clone()} on_minus_button={on_player_delete.clone()} uuid={key}/> 
-                }
-            }).collect::<Html>()
-        }
+            {
+                props.players_vec.iter().map(|(key, player)| {
+                    html! { 
+                        <PlayerCard name={player.name.clone()} on_minus_button={props.on_player_delete.clone()} uuid={*key}/> 
+                    }
+                }).collect::<Html>()
+            }
         <div class="player-card" id="add-new-player" onclick={add_player_button_clicked}>
             <p>{ "+" }</p>
         </div>

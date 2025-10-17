@@ -1,5 +1,6 @@
 use yew::AttrValue;
 
+#[derive(PartialEq, Eq, Clone)]
 pub struct Player {
     pub name: AttrValue,
 }
