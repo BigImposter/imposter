@@ -70,8 +70,17 @@ pub fn PreGame(props: &PreGameProps) -> Html {
 
     let onclick = {
         let on_start_game = props.on_start_game.clone();
-        move |_| {
-            on_start_game.emit(GameProps {  });
+        let max_imposters= max_imposter_value.clone();
+        let min_imposters= min_imposter_value.clone();
+        let game_time = time_value.clone();
+        let players = players.clone();
+        move |_: MouseEvent| {
+            on_start_game.emit(GameProps {
+                max_imposters: *max_imposters, 
+                min_imposters: *min_imposters, 
+                game_time: *game_time, 
+                players: players.to_vec(),
+            });
         }
     };
 
