@@ -8,6 +8,8 @@ mod game_settings;
 mod slider;
 mod pre_game;
 mod game;
+mod timer;
+mod role_reveal;
 
 use app::App;
 

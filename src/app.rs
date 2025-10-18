@@ -1,6 +1,6 @@
 use yew::prelude::*;
 
-use crate::{game::{self, Game, GameProps}, game_settings::GameSettings, player_list::PlayerList, pre_game::PreGame};
+use crate::{game::{self, Game, GameProps}, game_settings::GameSettings, player_list::PlayerList, pre_game::PreGame, role_reveal::{Role, RoleReveal}, timer::Timer};
 
 #[derive(PartialEq)]
 enum GameState {
@@ -23,6 +23,8 @@ pub fn App() -> Html {
     };
 
     html! {
+        // <Timer time_in_s={10} on_timer_finished={|()| {}}/>
+        /* 
         <>
         if *game_state == GameState::Menu {
             <PreGame {on_start_game} />
@@ -33,5 +35,9 @@ pub fn App() -> Html {
             players={game_props.players.clone()}/>
         }
         </>
+        */
+        
+        <RoleReveal role={Role::Imposter(AttrValue::from("Hi"))}
+        on_role_reveal_finished={|_| {}}/>
     }
 }

@@ -7,6 +7,6 @@ pub struct Player {
 
 impl Player {
     pub fn new(name: AttrValue) -> Player {
-        Player { name: name}
+        Player { name: name }
     }
 }
