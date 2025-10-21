@@ -20,7 +20,7 @@ pub struct PreGameProps {
 
 #[function_component]
 pub fn PreGame(props: &PreGameProps) -> Html {
-    let players: UseMapHandle<Uuid, Player> = use_map(HashMap::new());
+    let players: UseMapHandle<Uuid, Player> = use_map(HashMap::from([(Uuid::new_v4(), Player::new(AttrValue::from("Noco")))]));
 
     let on_add_player = {
         let players = players.clone();
@@ -80,6 +80,7 @@ pub fn PreGame(props: &PreGameProps) -> Html {
                 min_imposters: *min_imposters, 
                 game_time: *game_time, 
                 players: players.to_vec(),
+                on_game_finished: Callback::from(|_| {}),
             });
         }
     };
@@ -91,7 +92,7 @@ pub fn PreGame(props: &PreGameProps) -> Html {
         <PlayerList {on_add_player} {on_player_delete} {players_vec}/>
         <GameSettings player_list_length={players_length as u32} time_value={*time_value} max_imposter_value={*max_imposter_value} min_imposter_value={*min_imposter_value}
         {on_time_value_change} {on_max_imposter_value_change} {on_min_imposter_value_change}/>
-        <button {onclick}>{"Start Game"}</button>
+        <button {onclick} id="normal-button">{"Start Game"}</button>
         </>
     }
 }

@@ -95,6 +95,7 @@ body {
     border-radius: 25px;
     width: 90%;
     padding: 10px;
+    background-color: var(--primary-color);
 }
 
 #add-new-player {
@@ -107,7 +108,7 @@ body {
     justify-content: center;
     align-items: flex-end;
     position: relative;
-    width: 150px;
+    width: 100%;
     height: 300px;
     background-color: var(--background-color);
     overflow: hidden;
@@ -132,4 +133,41 @@ body {
     cursor: pointer;
     z-index: 2;
     position: absolute;
+}
+
+#normal-button {
+    background-color: var(--mintgreen); /* Green background */
+    color: black; /* White text */
+    border: none; /* Remove the border */
+    padding: 12px 24px; /* Larger size with padding */
+    font-size: 16px; /* Font size */
+    border-radius: 25px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+.rolve-reveal {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+}
+
+.timer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 90dvh;
+    width: 90dvw;
+    border-radius: 25px;
+    background-color: var(--primary-color);
+}
+
+.game-end {
+    height: 90dvh;
+    width: 90dvw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--primary-color);
+    border-radius: 25px;
 }

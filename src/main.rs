@@ -10,6 +10,7 @@ mod pre_game;
 mod game;
 mod timer;
 mod role_reveal;
+mod game_end;
 
 use app::App;
 

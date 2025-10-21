@@ -1,0 +1,7 @@
+{
+    "name": "Imposter Beta",
+    "short_name": "ImpBt",
+    "lang": "de-DE",
+    "start_url": "./index.html",
+    "display": "standalone"
+  }
