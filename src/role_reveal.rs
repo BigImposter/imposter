@@ -71,6 +71,51 @@ pub fn RoleReveal(props: &RoleRevealProps) -> Html {
         }
     };
 
+    let ontouchstart = {
+        let is_dragging = is_dragging.clone();
+        let start_y = start_y.clone();
+        move |e: TouchEvent| {
+            e.prevent_default();
+            is_dragging.set(true);
+            if let Some(touch) = e.touches().get(0) {
+                start_y.set(touch.client_y());
+            }
+        }
+    };
+
+    let ontouchend = {
+        let start_y = start_y.clone();
+        let offset_y = offset_y.clone();
+        let is_dragging = is_dragging.clone();
+        move |e: TouchEvent| {
+            e.prevent_default();
+            start_y.set(0);
+            offset_y.set(0);
+            is_dragging.set(false);
+        }
+    };
+
+    let ontouchmove = {
+        let start_y = start_y.clone();
+        let offset_y = offset_y.clone();
+        let is_dragging = is_dragging.clone();
+        let reveal_button = reveal_button.clone();
+        move |e: TouchEvent| {
+            e.prevent_default();
+            if *is_dragging {
+                if let Some(touch) = e.touches().get(0) {
+                    start_y.set(touch.client_y());
+                    
+                    let delta = (*start_y - touch.client_y()).clamp(-20, 90);
+                    if delta >= 55 {
+                        reveal_button.set(true);
+                    }
+                    offset_y.set(delta); // 55 => reveal button
+                }
+            }
+        }
+    };
+
     html! {
         <div class="role-reveal">
             <div class="player-card">{props.player_name.clone()}</div>
@@ -80,6 +125,9 @@ pub fn RoleReveal(props: &RoleRevealProps) -> Html {
                     {onmousedown}
                     {onmousemove}
                     {onmouseup}
+                    {ontouchstart}
+                    {ontouchend}
+                    {ontouchmove}
                 ></div>
                 <div class="covered-div">
                 {

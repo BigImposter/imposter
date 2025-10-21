@@ -88,11 +88,11 @@ pub fn PreGame(props: &PreGameProps) -> Html {
     
 
     html! {
-        <>
+        <div class="pre-game">
         <PlayerList {on_add_player} {on_player_delete} {players_vec}/>
         <GameSettings player_list_length={players_length as u32} time_value={*time_value} max_imposter_value={*max_imposter_value} min_imposter_value={*min_imposter_value}
         {on_time_value_change} {on_max_imposter_value_change} {on_min_imposter_value_change}/>
-        <button {onclick} id="normal-button">{"Start Game"}</button>
-        </>
+        <button {onclick} id="normal-button" align-self="flex-end">{"Start Game"}</button>
+        </div>
     }
 }

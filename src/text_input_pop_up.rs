@@ -39,8 +39,8 @@ pub fn TextInputPopUp(props: &TextPopupProps) -> Html {
             <p>{"Name für neue*n Spieler*In:"}</p>
             <input type="text" oninput={on_input}/>
             <div>
-                <button onclick={add_button_clicked}>{ "Hinzufügen" }</button>
-                <button onclick={abort_button_clicked}>{ "Abbrechen" }</button>
+                <button id="normal-button"  onclick={add_button_clicked}>{ "Hinzufügen" }</button>
+                <button id="normal-button" onclick={abort_button_clicked}>{ "Abbrechen" }</button>
             </div>
         </div>
     }
