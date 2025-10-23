@@ -122,9 +122,9 @@ pub fn RoleReveal(props: &RoleRevealProps) -> Html {
             <div class="role-reveal-container">
                 <div class="movable-div"
                     style={format!("bottom: {}px;", *offset_y)}
-                    {onmousedown}
-                    {onmousemove}
-                    {onmouseup}
+                    // {onmousedown}
+                    // {onmousemove}
+                    // {onmouseup}
                     {ontouchstart}
                     {ontouchend}
                     {ontouchmove}

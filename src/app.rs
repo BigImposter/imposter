@@ -34,6 +34,7 @@ pub fn App() -> Html {
     html! {
         // <Timer time_in_s={10} on_timer_finished={|()| {}}/>
         <>
+        {"Version 2.1"}
         if *game_state == AppState::Menu {
             <PreGame {on_start_game} />
         } else if *game_state == AppState::Playing {
